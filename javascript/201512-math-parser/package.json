@@ -1,0 +1,6 @@
+{
+  "name": "math-parser",
+  "version": "0.1.0-SNAPSHOT",
+  "description": "실제 수식을 파싱하여 자바스크립트에서 이용가능한 형태로 만들어주는 수식 파서",
+  "author": "Mason B.S. Kang <kbsbroad@gmail.com>",
+}
