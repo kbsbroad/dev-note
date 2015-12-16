@@ -1,0 +1,7 @@
+task helloWorld << {
+  println 'Hello World'
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.9'
+}
