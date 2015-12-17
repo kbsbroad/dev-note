@@ -71,3 +71,24 @@ task wrapper(type:Wrapper) {
 	gradleVersion='2.9'
 }
 ```
+
+## 자바 프로젝트로 선언
+`build.gradle`에 다음과 같이 한줄만 정의하면 자바코드를 빌드가능해진다.
+
+```groovy
+apply plugin: 'java'
+```
+
+그리고 `./gradlew build`를 실행해보자. `build` 디렉토리가 생기면서 jar파일이 생성되어 있다.
+
+## IntelliJ IDEA 사용하도록 선언
+`build.gradle`에 다음과 같이 선언한다.
+
+```groovy
+apply plugin: 'idea'
+```
+
+그러면 IntelliJ IDEA 툴을 사용할 수 있도록 하는 몇가지 Task를 실행할 수 있다. 우선 `./gradlew idea`를 실행하면 IntelliJ가 프로젝트로 인식할 수 있도록 몇가지 파일 생성한다.
+
+## 참고자료
+- [Building Java Projects with Gradle](https://spring.io/guides/gs/gradle/)

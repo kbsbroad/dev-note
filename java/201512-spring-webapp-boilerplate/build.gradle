@@ -1,4 +1,24 @@
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+mainClassName = 'hello.HelloWorld'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    baseName = "spring-webapp-bolierplate"
+    version = '0.1.0-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile "joda-time:joda-time:2.2"
+}
 
 task wrapper(type: Wrapper) {
   gradleVersion = '2.9'
