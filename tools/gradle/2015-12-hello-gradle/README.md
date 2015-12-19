@@ -240,5 +240,67 @@ jar {
 
 그리고 다시 `./gradlew assemble`을 수행하면 jar 파일명이 "hello-gradle-0.1.0-SNAPSHOT.jar"로 변경되어 있을 것이다.
 
+### 의존모듈 설정
+Maven 처럼 gradle에서도 의존모듈을 설정할 수 있다. 위의 HelloGradle을 약간 수정해보자.
+
+```java
+package greeting;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+public class HelloGradle {
+  public static void main(String args[]) {
+    System.out.println("Hello, Gradle!");
+  }
+
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this);
+  }
+}
+```
+
+그리고 `./gradlew assemble`을 수행해보자. task가 실패할 것이다. 이는 commmon-lang3 모듈이 없기 때문이다. gradle의 장점은 maven 저장소를 이용하여 자바 모듈을 다운로드 받을 수 있다는 점이다. 
+
+maven 공용저장소를 이용하기 위해서는 다음과 같이 `repositories` 블록을 이용하여 설정하면 된다.
+
+```groovy
+repositories {
+  mavenCentral()
+}
+```
+
+그리고, 의존모듈 설정을 위해서 다음과 같이 설정할 수 있다.
+
+```groovy
+dependencies {
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.2'
+}
+```
+혹은 다음과 같이 짧게 줄여서 사용할 수도 있다.
+```groovy
+dependencies {
+	compile 'org.apache.commons:commons-lang3:3.3.2'
+}
+```
+
+> **참고: Maven과 비교**
+> pom.xml에서는 다음과 같다.
+> ```xml
+> <groupId>org.appache.commons</groupId>
+> <artifactId>commons-lang3</artifactId>
+> <version>3.3.2</version>
+> ```
+
+### Dependency Configurations
+dependencies 설정 내부에서 사용할 수 있는 설정함수들은 다음과 같다(이는 java 플러그인이 제공해주는 것이다.)
+
+- compile
+- runtime
+- testCompile
+- testRuntime
+
+> 참고: Maven에서 제공하는 provided와 같은 설정이 기본으로 제공되지는 않으나, 만들수는 있다. 너무 깊은 주제이므로 필요할 경우 추후에 학습!
+
 ## References
+- [권남님 위키 - Gradle](http://kwonnam.pe.kr/wiki/gradle)
 - [Announcing .. Gradle Tutorial Series](http://rominirani.com/2014/07/28/gradle-tutorial-series-an-overview/)

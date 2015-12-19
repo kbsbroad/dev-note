@@ -5,6 +5,14 @@ jar {
 	version = '0.1.0-SNAPSHOT'
 }
 
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+	compile 'org.apache.commons:commons-lang3:3.3.2'
+}
+
 defaultTasks 'buildTask'
 
 task helloGradle << {
