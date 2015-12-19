@@ -1,9 +1,6 @@
 # Hello Gradle!
 Gradle을 배워보자.
 
-## 기초지식
-(차근차근 정리 예정)
-
 ## 학습목표
 - Gradle의 기본 사용법을 익힌다.
 - Gradle 기반의 프로젝트를 생성하는 방법을 배운다.
@@ -80,3 +77,6 @@ task wrapper(type:Wrapper) {
 $ ./gradlew -q helloGradle
 Hello Gradle!
 ```
+
+## References
+- [Announcing .. Gradle Tutorial Series](http://rominirani.com/2014/07/28/gradle-tutorial-series-an-overview/)
