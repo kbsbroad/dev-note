@@ -1,5 +1,22 @@
+apply plugin: 'java'
+
+jar {
+	baseName = 'hello-gradle'
+	version = '0.1.0-SNAPSHOT'
+}
+
+defaultTasks 'buildTask'
+
 task helloGradle << {
 	println 'Hello Gradle!'
+}
+
+task compileTask << {
+	println "compiling..."
+}
+
+task buildTask(dependsOn:compileTask) << {
+	println "building..."
 }
 
 task wrapper(type:Wrapper) {
