@@ -90,6 +90,41 @@ $ sudo wget –qO- https://get.docker.com/ | sh
 ```
 > 단, `wget`이 설치되어 있어야 한다. wget 설치는 구글링해보면 금방 찾을 수 있다.
 
+위 스크립트를 이용하면 설치 후 실행까지 완료된다. 또한, sudo 명령어없이 실행할 수 있도록 하는 방법까지 알려준다.
+
+바로 도커 실행을 쉽게 확인할 수 있도록, `hello-world` 이미지를 기본 제공하고 있다. `hello-world` 이미지를 실행시켜 설치가 잘되어 있는지 알수 있다.
+
+```sh
+$ sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+b901d36b6f2f: Pull complete
+0a6ba66e537a: Pull complete
+Digest: sha256:8be990ef2aeb16dbcb9271ddfe2610fa6658d13f6dfb8bc72074cc1ca36966a7
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker Hub account:
+ https://hub.docker.com
+
+For more examples and ideas, visit:
+ https://docs.docker.com/userguide/
+```
+처음 설치 후에는 로컬호스트에 `hello-world` 이미지가 없기 때문에 Docker Hub에서 해당 이미지를 다운로드 받는다.
+
 #### Window, Mac
 도커는 리눅스 컨테이너 기술을 필요하기 때문에 리눅스가 필요하다. Window나 Mac 환경에서 도커를 사용하기 위해서는 Virtual Box와 같은 가상화 솔루션을 이용할 수 밖에 없다.
 
@@ -102,11 +137,128 @@ $ sudo wget –qO- https://get.docker.com/ | sh
 > - Docker Toolbox 실행시 `~ hostifonly create failed`를 만날 경우, Virtual Box 버전이 낮아서 발생한 것일 수 있으니, Virtual Box를 최신 버전으로 설치해보자.
 > - Windows 10 환경에서는 Docker Toolbox가 실행이 안된다. 정확히 말하자면, VM이 실행하다가 오류난다. 그래서, Vagrant를 이용해서 실습을 진행했다.
 
-### 도커의 실행
-도커는 설치 후 바로 도커 실행을 쉽게 확인할 수 있도록, `hello-world` 이미지를 기본 제공하고 있다. `hello-world` 이미지를 이용해서 도커에서 주로 사용되는 명령어들을 알아보자
 
-#### 기본 사용법
+## 도커 실습
+
+도커를 실행하는 기본 용법은 다음과 같다.
 
 ```sh
-$ docker [sub command] [options]
+$ docker [OPTIONS] COMMAND [arg...]
 ```
+
+각 COMMAND에서 사용할 수 있는 옵션들이 있는데, 이는 `docker COMMAND --help`를 통해 확인해볼 수 있다.
+
+### docker pull
+도커 등록소(registry)로 부터 이미지나 저장소를 가지고 온다.
+
+#### 사용법
+```sh
+$ docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+```
+
+#### 주요 옵션들
+|option|desc.|
+|-|-|
+|`-a` or `--all-tags`|저장소내에 태깅된 모든 도커 이미지를 가지고 온다.|
+
+
+### docker images
+호스트에 있는 image 목록을 보여준다.
+
+#### 사용법
+```sh
+$ docker images [OPTIONS] [REPOSITORY[:TAG]]
+```
+
+#### 주요 옵션들
+|option|desc.|
+|-|-|
+|`-a` or `--all`|호스트의 모든 이미지를 보여준다.|
+|`--no-trunc`|출력되는 목록을 원본대로 보여준다. 주로 IMAGE ID가 줄여준다.|
+|`-q`|이미지 ID만 출력한다.|
+
+### docker run
+도커 이미지를 실행하는 명령어이다.
+
+#### 사용법
+```sh
+$ docker run [OPTIONS] IMAGENAME[:TAG] [ARG...]
+```
+- OPTIONS: run 명령어를 실행할 때 사용할 수 있는 옵션들이다.
+- IMAGENAME: 실행할 이미지 이름이다.
+- TAG: 특정 태그의 이미지를 실행할 경우 사용할 수 있다.
+- ARG: 컨테이너 내부에서 수행해야 할 작업들을 지정한다.
+
+`run` 명령어는 로컬호스트에서 해당 이미지를 찾아서 실행시킨다. 로컬호스트에 이미지가 없다면 Docker Hub에서 이미지를 찾아서 다운로드(`docker pull`)한다.
+
+#### 주요 옵션들
+|option|desc.|
+|-|-|
+|`-d`|컨테이너를 데몬형태로 실행한다.|
+|`-p {호스트 port}:{컨테이너 port}`|호스트의 port와 컨테이너 내부의 포트를 연결한다.|
+|`-t`|pseudo-tty or terminal|
+
+### docker ps
+컨테이너 목록을 보여준다. 기본옵션은 실행중인 컨테이너 목록만 보여진다.
+
+#### 사용법
+```sh
+$ docker ps [OPTIONS]
+```
+
+#### 주요 옵션들
+|option|desc.|
+|-|-|
+|`-a` or `--all`|호스트의 모든 컨테이너를 보여준다.|
+|`-f` or `--filter`|특정 조건에 해당하는 목록을 보여준다.|
+|`-l` or `--latest`|제일 최근에 생성된 컨테이너를 보여준다.|
+|`-s` or `--size`|컨테이너의 총 용량을 표시한다.|
+
+#### Filtering
+필터에 대해서는 별도로 설명할 필요가 있다. `ps -ef | grep XXX` 처럼 특정 컨테이너의 상태를 알고 싶을 때 filter 옵션을 사용해야 하기 때문이다.
+
+필터의 값은 key=value 조합의 문자열이다. key로 지원되는 항목은 다음과 같다
+
+|key name|desc.|
+|-|-|
+|id|조건값을 포함하는 컨테이너 ID를 가진 컨테이너 목록을 보여준다.|
+|label|??(label의 개념을 아직 잘 파악하지 못함)|
+|name|조건값을 이름으로 포함하는 컨테이너 목록을 보여준다.|
+|exited|특정 exited 상태의 컨테이너 목록을 보여준다.|
+|status|조건에 해당하는 상태의 컨테이너 목록을 보여준다.|
+|ancestor|조건에 해당하는 부모이미지에 해당하는 컨테이너 목록을 보여준다.|
+
+> **참고 1: status 값**
+> - created : 생성된 상태
+> - restarting : 재시작 중인 상태
+> - running : 실행 중 상태
+> - paused : 일시정지된 상태
+> - existed : 컨테이너에서 빠져나온 상태(실행이 중단된 상태)
+
+> **참고 2: ancestor 값의 포맷**
+> - IMAGE
+> - IMAGE:TAG
+> - IMAGE:TAG@DIGEST
+> - 축약 ID
+> - 전체 ID
+
+
+### docker stop
+
+### docker attach
+
+### docker rm
+컨테이너를 삭제한다.
+
+#### 사용법
+```sh
+$ docker mr [OPTIONS] CONTAINER [CONTAINER...]
+```
+
+#### 주요 옵션들
+|option|desc.|
+|-|-|
+|`-f` or `--force`|실행중인 컨테이너를 강제로 삭제(SIGKILL)|
+|`-v` or `--volumns`|컨테이너와 관계된 디스크 볼륨을 삭제한다.|
+
+### docker rmi
