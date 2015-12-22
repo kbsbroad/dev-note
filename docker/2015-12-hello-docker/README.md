@@ -178,7 +178,7 @@ option         |desc.
 `-q`           |이미지 ID만 출력한다.
 
 ### docker run
-도커 이미지를 실행하는 명령어이다.
+도커 이미지를 실행하는 명령어이다. `docker run` 명령은 별도의 페이지로 문서가 존재할만큼 중요하고 자주 사용되는 명령어 중 하나이다.
 
 #### 사용법
 ```sh
@@ -194,9 +194,35 @@ $ docker run [OPTIONS] IMAGENAME[:TAG] [ARG...]
 #### 주요 옵션들
 option                           |desc.
 ---------------------------------|-------------------------------------------
-`-d`                             |컨테이너를 데몬형태로 실행한다.
+`-d`                             |컨테이너를 Detached Mode로 실행한다.
 `-p {host port}:{container port}`|호스트의 port와 컨테이너 내부의 포트를 연결한다.
 `-t`                             |pseudo-tty or terminal
+`--rm`                           |컨테이너가 종료될 때 컨테이너도 삭제한다.
+
+> 참고: `-d`옵션과 `--rm`옵션은 함께 사용할 수 없다.
+
+#### Detached Mode
+`-d` 옵션으로 실행하면 컨테이너는 Detached mode로 실행된다. Detached mode로 실행된 컨테이너는 컨테이너에서 빠져나와도 컨테이너가 자동으로 종료되지 않는다.
+
+다만, Detached Mode와 관련해서 도커 문서에 아래와 같은 글귀가 있다.
+
+> By design, containers started in detached mode exit when the root process used to run the container exits.
+> by [Docker Docs > Command And API references > Docker run reference](https://docs.docker.com/engine/reference/run/)
+
+여기서 주의할 점은 컨테이너 내에서 실행되는 루트 프로세스가 종료되면, detached mode로 실행된 컨테이너도 종료된다는 사실이다. 이것은 컨테이너내에서 실행되는 루트 프로세스는 실행 중인 상태여야 한다는 의미이다.
+
+설명이 어려우니 예제를 보자.
+
+```sh
+docker run -d my-ubutu-nginx service nginx start
+```
+docker run을 이용해 컨테이너내에서 `service nginx start`를 실행하면 nginx가 시작되지만, 새로운 프로세스를 만들어 백그라운드 상태로 전환 후 루트 프로세스(`service nginx start`)는 종료된다. 따라서, 컨테이너도 종료된다.
+
+컨테이너가 종료되지 않도록 하려면, 아래와 같이 foreground 상태로 실행되도록 만들어야 한다.
+
+```sh
+docker run -d my-ubuntu-nginx nginx -g 'daemon off;'
+```
 
 ### docker stop
 
