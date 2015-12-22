@@ -10,4 +10,9 @@
 
 ## Index
 
-(아직 작성된 노트가 없어요. 힘을 냅시다~~)
+### DOCKER
+- [Hello, Docker](https://github.com/kbsbroad/dev-note/tree/master/docker/2015-12-hello-docker)
+
+### GRADLE
+- [Hello, Gradle!](https://github.com/kbsbroad/dev-note/tree/master/gradle/2015-12-hello-gradle)
+- [GRADLE로 자바프로젝트 시작하기](https://github.com/kbsbroad/dev-note/tree/master/gradle/2015-12-java-project-with-gradle)
