@@ -198,6 +198,8 @@ $ docker run [OPTIONS] IMAGENAME[:TAG] [ARG...]
 |`-p {호스트 port}:{컨테이너 port}`|호스트의 port와 컨테이너 내부의 포트를 연결한다.|
 |`-t`|pseudo-tty or terminal|
 
+### docker stop
+
 ### docker ps
 컨테이너 목록을 보여준다. 기본옵션은 실행중인 컨테이너 목록만 보여진다.
 
@@ -242,8 +244,19 @@ $ docker ps [OPTIONS]
 > - 축약 ID
 > - 전체 ID
 
+### docker exec
+실행중인 컨테이너 내부에서 명령을 실행한다.
 
-### docker stop
+#### 사용법
+```sh
+$ docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+```
+
+#### 주요 옵션들
+|option|desc.|
+|-|-|
+|`-d` or `--detach`|백그라운드로 실행|
+|`-i` or `--interactive`|컨테이너와 관계된 디스크 볼륨을 삭제한다.|
 
 ### docker attach
 
@@ -252,7 +265,7 @@ $ docker ps [OPTIONS]
 
 #### 사용법
 ```sh
-$ docker mr [OPTIONS] CONTAINER [CONTAINER...]
+$ docker rm [OPTIONS] CONTAINER [CONTAINER...]
 ```
 
 #### 주요 옵션들
