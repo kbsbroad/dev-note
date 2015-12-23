@@ -281,6 +281,7 @@ option                           | desc.
 `-i` or `--interactive=false`    | 컨테이너의 STDIN을 연결한 채로 유지한다.
 `-t` or `--tty=false`            | 가상터미널(pseudo-TTY)을 연결한다.
 `--rm=false`                     | 컨테이너가 종료될 때 컨테이너도 삭제한다.
+`--privileged=false`             | 시스템 명령을 수행할 수 있도록 함
 
 > **참고) **
 > - `-a` 옵션의 기본값은 STDIN, STDOUT, STDERR에 모두 바인딩하는 것이다.
@@ -311,6 +312,17 @@ docker run -d my-ubuntu-nginx nginx -g 'daemon off;'
 ```
 
 ### docker stop
+실행중인 컨테이너(의 프로세스)를 중지시킨다(SIGTERM -> SIGKILL)
+
+#### 사용법
+```sh
+$ docker stop [OPTIONS] CONTAINER [CONTAINER...]
+```
+
+#### 주요 옵션들
+option              | desc.
+--------------------|-------------------------------------------
+`-t` or `--time=10` | 중지시키기 전 지정한 시간(초)만큼 대기한다.
 
 ### docker ps
 컨테이너 목록을 보여준다. 기본옵션은 실행중인 컨테이너 목록만 보여진다.
@@ -365,12 +377,38 @@ $ docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
 ```
 
 #### 주요 옵션들
-option                 |desc.
------------------------|-----------------------------------
-`-d` or `--detach`     |백그라운드로 실행
-`-i` or `--interactive`|컨테이너와 관계된 디스크 볼륨을 삭제한다.
+option                       | desc.
+-----------------------------|--------------------------------------
+`-d` or `--detach=false`     | 명령을 백그라운드로 실행(Detached Model)
+`-i` or `--interactive=false`| 컨테이너의 STDIN을 연결한 채로 유지한다.
+`--privileged=false`         | 시스템 명령을 수행할 수 있도록 함
+`-t` or `--tty=false`        | 가상터미널(pseudo-TTY)을 연결한다.
+`-u` or `--user=`            | 연결계정 지정
+
+#### 예제
+```sh
+$ docker run --name ubuntu_bash --rm -i -t ubuntu bash
+```
+컨테이너를 생성하고 bash 세션을 시작한다.
+
+```sh
+$ docker exec -d ubuntu_bash touch /tmp/execWorks
+```
+`/tmp/execWorks` 파일을 생성하는 명령 수행한다.
+
+```sh
+$ docker exec -it ubuntu_bash bash
+```
+새로운 bash 세션 시작.
+
 
 ### docker attach
+실행중인 컨테이너에 접속한다.
+
+#### 사용법
+```sh
+$ docker attach [OPTIONS] CONTAINER
+```
 
 ### docker rm
 컨테이너를 삭제한다.
@@ -387,3 +425,15 @@ option             |desc.
 `-v` or `--volumns`|컨테이너와 관계된 디스크 볼륨을 삭제한다.
 
 ### docker rmi
+이미지를 삭제한다.
+
+#### 사용법
+```sh
+$ docker rmi [OPTIONS] IMAGE [IMAGE...]
+```
+
+#### 주요 옵션들
+option             | desc.
+-------------------|------------------------------------
+`-f` or `--force`  | 이미지를 강제로 삭제(SIGKILL)
+`--no-prune=false` | 태깅되지 않은 부모 이미지를 삭제하지 않음
