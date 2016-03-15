@@ -35,7 +35,7 @@ $ npm install babel-preset-es2015 --save-dev
 ```
 
 #### 테스트코드 작성
-`test` 디렉토리를 만들고 `mocah.opts`를 작성하면 mocha 옵션을 손쉽게 관리할 수 있다. 옵션에 대한 자세한 설명은 다른 학습노트에서 다루기로 하고 생략한다.
+`test` 디렉토리를 만들고 `mocha.opts`를 작성하면 mocha 옵션을 손쉽게 관리할 수 있다. 옵션에 대한 자세한 설명은 다른 학습노트에서 다루기로 하고 생략한다.
 ```
 -u bdd
 --recursive
