@@ -1,0 +1,31 @@
+{
+  "name": "hello-jest",
+  "version": "0.1.0",
+  "description": "Jest 테스트 프로젝트",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-jest": "^12.1.0",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-3": "^6.5.0",
+    "jest-cli": "^12.1.1",
+    "react-addons-test-utils": "^15.1.0"
+  },
+  "dependencies": {
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
+  },
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react/",
+      "<rootDir>/node_modules/react-dom/",
+      "<rootDir>/node_modules/react-addons-test-utils/"
+    ]
+  }
+}
