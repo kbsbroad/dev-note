@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1464936341863" clover="3.2.0">
+	<project timestamp="1464936341863"  name="All Files" >
+		<metrics statements="20"  coveredstatements="20"  conditionals="39"  coveredconditionals="25"  methods="18"  coveredmethods="18"  elements="77"  coveredelements="63"  complexity="0"  packages="4"  files="4"  classes="4"  loc="41"  ncloc="41" />
+		<package name="CheckboxWithLabel" >
+			<metrics statements="8"  coveredstatements="8"  conditionals="33"  coveredconditionals="20"  methods="11"  coveredmethods="11" />
+			<file name="CheckboxWithLabel.js"  path="/Users/bskang/Projects/github/kbsbroad/dev-note/javascript/201606-jest-test/src/CheckboxWithLabel/CheckboxWithLabel.js" >
+				<metrics statements="8"  coveredstatements="8"  conditionals="33"  coveredconditionals="20"  methods="11"  coveredmethods="11" />
+				<line num="1"  count="2"  type="cond"  truecount="18"  falsecount="13" />
+				<line num="3"  count="1"  type="stmt" />
+				<line num="5"  count="1"  type="stmt" />
+				<line num="7"  count="1"  type="stmt" />
+				<line num="8"  count="1"  type="stmt" />
+				<line num="12"  count="1"  type="stmt" />
+				<line num="16"  count="2"  type="stmt" />
+				<line num="23"  count="1"  type="cond"  truecount="2"  falsecount="0" />
+			</file>
+		</package>
+		<package name="async" >
+			<metrics statements="3"  coveredstatements="3"  conditionals="4"  coveredconditionals="3"  methods="3"  coveredmethods="3" />
+			<file name="user.js"  path="/Users/bskang/Projects/github/kbsbroad/dev-note/javascript/201606-jest-test/src/async/user.js" >
+				<metrics statements="3"  coveredstatements="3"  conditionals="4"  coveredconditionals="3"  methods="3"  coveredmethods="3" />
+				<line num="1"  count="1"  type="stmt" />
+				<line num="3"  count="1"  type="cond"  truecount="3"  falsecount="1" />
+				<line num="4"  count="4"  type="stmt" />
+			</file>
+		</package>
+		<package name="async.__mocks__" >
+			<metrics statements="6"  coveredstatements="6"  conditionals="2"  coveredconditionals="2"  methods="3"  coveredmethods="3" />
+			<file name="request.js"  path="/Users/bskang/Projects/github/kbsbroad/dev-note/javascript/201606-jest-test/src/async/__mocks__/request.js" >
+				<metrics statements="6"  coveredstatements="6"  conditionals="2"  coveredconditionals="2"  methods="3"  coveredmethods="3" />
+				<line num="1"  count="1"  type="stmt" />
+				<line num="6"  count="1"  type="stmt" />
+				<line num="7"  count="4"  type="stmt" />
+				<line num="8"  count="4"  type="stmt" />
+				<line num="9"  count="4"  type="stmt" />
+				<line num="10"  count="4"  type="cond"  truecount="2"  falsecount="0" />
+			</file>
+		</package>
+		<package name="sum" >
+			<metrics statements="3"  coveredstatements="3"  conditionals="0"  coveredconditionals="0"  methods="1"  coveredmethods="1" />
+			<file name="sum.js"  path="/Users/bskang/Projects/github/kbsbroad/dev-note/javascript/201606-jest-test/src/sum/sum.js" >
+				<metrics statements="3"  coveredstatements="3"  conditionals="0"  coveredconditionals="0"  methods="1"  coveredmethods="1" />
+				<line num="1"  count="1"  type="stmt" />
+				<line num="2"  count="1"  type="stmt" />
+				<line num="4"  count="1"  type="stmt" />
+			</file>
+		</package>
+	</project>
+</coverage>
